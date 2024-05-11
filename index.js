@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
-import colors from "colors";
-import chalk from "chalk";
-let colorFunction;
+import chalk from 'chalk';
+import fs from "fs";
+
 
 inquirer
   .prompt([
@@ -50,13 +50,40 @@ inquirer
   ])
   .then((response) => {
     let colorFunction;
-  
+
+    let {
+      text,
+      textColor,
+      shape,
+      shapeColor
+    } = response;
+    
+    // if hexidecimal, use chalk.hex
     if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(response.textColor)) {
       colorFunction = chalk.hex(response.textColor);
-    } else {
+    } else if (/^([a-zA-Z]+)$/.test(textColor)) {
       // If it's not a hexadecimal, assume it's a keyword
-      colorFunction = chalk.keyword(response.textColor);
+      colorFunction = chalk[textColor];
+    } else {
+       // If it's not a hexadecimal or a keyword
+      console.log('Invalid color input');
     }
-  
-    console.log(colorFunction(response.text));
+
+    if (shape === "circle") {
+      shape = "circle";
+    } else if (shape === "triangle") {
+      shape = "polygon points='150,20 100,180 200,180'";
+    } else if (shape === "square") {
+      shape = "rect x='50' y='50' width='100' height='100'";
+    }
+
+    const content = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    <${shape} cx="150" cy="100" r="80" fill="${shapeColor}"/>
+    <text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text></svg>`;
+
+    fs.writeFile("logo.svg", content, (err) => {
+      if (err) throw err;
+      console.log("Generated logo.svg");
+    });
+
   });
