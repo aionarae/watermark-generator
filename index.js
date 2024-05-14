@@ -68,11 +68,11 @@ inquirer
 
     if (shape === "circle") {
       shape = "circle";
-      shape = new shapes.Circle(shape,shapeColor,150,100,80).createCircle();
+      shape = new shapes.Circle(shape,shapeColor,150,100,80).createSVG();
     } else if (shape === "triangle") {
-      shape = new shapes.Triangle(shape, shapeColor,'200,10 250,200 125,210', ).createTriangle();
+      shape = new shapes.Triangle(shape, shapeColor,'200,10 250,200 125,210', ).createSVG();
     } else if (shape === "square") {
-      shape = new shapes.Square(shape,shapeColor, 50, 50, 0, 0, 100, 100).createSquare();
+      shape = new shapes.Square(shape,shapeColor, 50, 50, 0, 0, 100, 100).createSVG();
     }
 
     const content = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
