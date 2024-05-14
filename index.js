@@ -45,7 +45,6 @@ inquirer
         return 'Please enter a valid color keyword (like "red") or hexadecimal (like "#FF0000").';
       }
     }
-
   ])
   .then((response) => {
     let colorFunction;
@@ -69,23 +68,19 @@ inquirer
 
     if (shape === "circle") {
       shape = "circle";
-      shape = new shapes.Circle(shape, 100, 100, 150, 100, 80, shapeColor).createCircle();
+      shape = new shapes.Circle(shape,shapeColor,150,100,80).createCircle();
     } else if (shape === "triangle") {
-      shape = new shapes.Triangle(shape, '150,20 100,180 200,180', shapeColor).createTriangle();
-      shape = "polygon points='150,20 100,180 200,180'";
+      shape = new shapes.Triangle(shape, shapeColor,'200,10 250,200 125,210', ).createTriangle();
     } else if (shape === "square") {
-      shape = new shapes.Square(shape, 50, 50, 0, 0, 100, 100, shapeColor).createSquare();
-      shape = "rect x='50' y='50' width='100' height='100'";
+      shape = new shapes.Square(shape,shapeColor, 50, 50, 0, 0, 100, 100).createSquare();
     }
 
     const content = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-    <${shape} fill="${shapeColor}"/>
+    <${shape}/>
     <text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text></svg>`;
-    // <${shape} cx="150" cy="100" r="80" fill="${shapeColor}"/>
 
     fs.writeFile("logo.svg", content, (err) => {
       if (err) throw err;
       console.log("Generated logo.svg");
     });
-
   });
