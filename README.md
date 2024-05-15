@@ -1,8 +1,8 @@
 # Watermark Generator
   
-## Screenshot:
+## Screen Recording:
 
-![Image alt text](./assets/recording/screen-recording.mov)
+https://github.com/aionarae/watermark-generator/blob/main/assets/recording/screen-recording.mov
 
 ## Link to deployed application:
 
